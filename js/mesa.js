@@ -6,7 +6,8 @@ var geometry, material, mesh;
 
 var ball;
 
-var testi;
+var testi, testi2;
+
 
 function addTableLeg(obj, x, y, z) {
     'use strict';
@@ -79,6 +80,22 @@ function createTesti(){
     scene.add(testi);
 }
 
+function createTesti2(){
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
+
+    const material = new THREE.MeshBasicMaterial({color: 0xffff0f});
+
+    testi2 = new THREE.Mesh(geometry,material);
+    testi2.rotation.x = Math.PI / 2;
+    testi2.rotation.y = 0;
+    testi2.rotation.z = 0;
+
+
+    scene.add(testi2);
+}
+
 function createScene() {
     'use strict';
     
@@ -90,6 +107,8 @@ function createScene() {
     //createTable(0, 8, 0);
     //createBall(0, 0, 15);
     createTesti();
+    createTesti2();
+
 }
 
 function createCamera() {
@@ -174,13 +193,18 @@ function init() {
 
 
 var loler = 0;
+var heyo = 0;
 function animate() {
 
     'use strict';
-    loler += 0.005;
-    let lol = 3 * (Math.sin(loler));
+    loler += 0.006;
+    heyo += 0.004
+    let lol = 3 * (Math.cos(loler));
     testi.scale.set(lol,lol,lol);
-    testi.position.y = 3 * Math.cos(loler)
+    testi.position.y = Math.abs(3 * Math.sin(loler));
+    let lol1 = 5 * (Math.sin(loler));
+    testi2.scale.set(lol1,lol1,lol1);
+    testi2.position.y = Math.abs(5 * Math.cos(loler));
     /*if (ball.userData.jumping) {
         ball.userData.step += 0.04;
         ball.position.y = Math.abs(30 * (Math.sin(ball.userData.step)));
