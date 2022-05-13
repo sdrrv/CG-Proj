@@ -6,7 +6,7 @@ var geometry, material, mesh;
 
 var ball;
 
-var testi, testi2;
+var testi, testi2, leBall1;
 
 
 function addTableLeg(obj, x, y, z) {
@@ -69,7 +69,7 @@ function createTesti(){
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
 
-    const material = new THREE.MeshBasicMaterial({color: 0xffffff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
 
     testi = new THREE.Mesh(geometry,material);
     testi.rotation.x = Math.PI / 2;
@@ -80,12 +80,29 @@ function createTesti(){
     scene.add(testi);
 }
 
+
+function createBall1(x, y ,z){
+    'use strict';
+
+    const geometry = new THREE.SphereGeometry(1,100,100,0,360,0,180);
+    const material = new THREE.MeshNormalMaterial({color: 0x5bba1a});
+    leBall1 = new THREE.Mesh(geometry,material);
+
+    leBall1.position.x = x;
+    leBall1.position.y = y;
+    leBall1.position.z = z;
+
+
+    scene.add(leBall1);
+
+}
+
 function createTesti2(){
     'use strict';
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
 
-    const material = new THREE.MeshBasicMaterial({color: 0xffff0f});
+    const material = new THREE.MeshToonMaterial({color: 0xde28db});
 
     testi2 = new THREE.Mesh(geometry,material);
     testi2.rotation.x = Math.PI / 2;
@@ -108,6 +125,7 @@ function createScene() {
     //createBall(0, 0, 15);
     createTesti();
     createTesti2();
+    createBall1(0,0,0);
 
 }
 
@@ -117,9 +135,9 @@ function createCamera() {
                                          window.innerWidth / window.innerHeight,
                                          1,
                                          1000);
-    camera.position.x = 5;
-    camera.position.y = 5;
-    camera.position.z = 5;
+    camera.position.x = 10;
+    camera.position.y = 10;
+    camera.position.z = 10;
     camera.lookAt(scene.position);
 }
 
@@ -194,17 +212,27 @@ function init() {
 
 var loler = 0;
 var heyo = 0;
+var leBallSpeed = 0;
 function animate() {
 
     'use strict';
-    loler += 0.006;
-    heyo += 0.004
+    loler += 0.007;
+    heyo += 0.002;
+    leBallSpeed += 0.05;
     let lol = 3 * (Math.cos(loler));
     testi.scale.set(lol,lol,lol);
     testi.position.y = Math.abs(3 * Math.sin(loler));
     let lol1 = 5 * (Math.sin(loler));
     testi2.scale.set(lol1,lol1,lol1);
     testi2.position.y = Math.abs(5 * Math.cos(loler));
+
+    //---------------------------------------------------------------------
+    leBall1.position.y = 4 * Math.sin(leBallSpeed);
+    //---------------------------------------------------------------------
+
+
+
+
     /*if (ball.userData.jumping) {
         ball.userData.step += 0.04;
         ball.position.y = Math.abs(30 * (Math.sin(ball.userData.step)));
