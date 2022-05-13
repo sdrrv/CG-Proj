@@ -90,7 +90,7 @@ function createFirstRing6(obj) {
 
     const geometry = new THREE.TorusGeometry(2,0.10,20,360,360);
 
-    const material = new THREE.MeshNormalMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
 
     firstRing6 = new THREE.Mesh(geometry,material);
 
@@ -105,7 +105,7 @@ function createSecondRing6(obj) {
 
     const geometry = new THREE.TorusGeometry(2.5,0.10,20,360,360);
 
-    const material = new THREE.MeshNormalMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0xffffff});
 
     secondRing6 = new THREE.Mesh(geometry,material);
 
@@ -124,11 +124,18 @@ function createObject6() {
 
     scene.add(atom);
 
-    table.position.x = 0;
-    table.position.y = 0;
-    table.position.z = 0;
-
+    atom.position.x = 20;
+    atom.position.y = 10;
+    atom.position.z = 5;
 }
+
+    function animateObject6() {
+        firstRing6.rotation.x += 0.025;
+        firstRing6.rotation.y += 0.025;
+
+        secondRing6.rotation.z += 0.025;
+        secondRing6.rotation.y += 0.025;
+    }
 
 
 
@@ -145,6 +152,8 @@ function createScene() {
     firstCreateRing2();
     firstCreateBall(0,0,0);
     //-------------------------------------
+    createObject6();
+
 }
 
 function createCamera() {
@@ -205,7 +214,7 @@ function render() {
 
 
 function createLight(){
-    const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    const directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
     scene.add( directionalLight );
 }
 
@@ -231,7 +240,8 @@ function animate() {
     'use strict';
 
     animateFirst(); // First
-
+    animateObject6();
+    //atom.position.y += 0.01;
     render();
     
     requestAnimationFrame(animate);
