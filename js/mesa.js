@@ -83,11 +83,11 @@ function createScene() {
 
     scene.add(new THREE.AxisHelper(10));
 
-
+    //-----------------First--------------
     firstCreateRing1();
     firstCreateRing2();
     firstCreateBall(0,0,0);
-
+    //-------------------------------------
 }
 
 function createCamera() {
@@ -96,9 +96,9 @@ function createCamera() {
                                          window.innerWidth / window.innerHeight,
                                          1,
                                          1000);
-    camera.position.x = 10;
-    camera.position.y = 10;
-    camera.position.z = 10;
+    camera.position.x = 20;
+    camera.position.y = 20;
+    camera.position.z = 20;
     camera.lookAt(scene.position);
 }
 
