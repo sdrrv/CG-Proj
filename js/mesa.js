@@ -73,7 +73,83 @@ function animateFirst(){
 
 }
 
-//-------------------------------------------------------------------------
+//------------------------- SIXTH ----------------------------------
+var ball6, firstRing6, secondRing6, atom, object6;
+
+function createBall6(obj){
+    'use strict';
+    const geometry = new THREE.SphereGeometry( 1, 100, 100, 0, 360, 0, 180 );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    ball6 = new THREE.Mesh( geometry, material );
+    ball6.position.set(0,0,0);
+    obj.add(ball6);
+}
+
+function createFirstRing6(obj) {
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(2,0.10,20,360,360);
+
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+
+    firstRing6 = new THREE.Mesh(geometry,material);
+
+    firstRing6.rotation.x = -Math.PI;
+    firstRing6.rotation.y = Math.PI / 4;
+    firstRing6.rotation.z = - Math.PI;
+
+    obj.add(firstRing6);
+}
+
+function createSecondRing6(obj) {
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(2.5,0.10,20,360,360);
+
+    const material = new THREE.MeshToonMaterial({color: 0x510391});
+
+    secondRing6 = new THREE.Mesh(geometry,material);
+
+    secondRing6.rotation.x = Math.PI / 2;
+    obj.add(secondRing6);
+}
+
+function createAtom(obj) {
+
+}
+
+function createObject6() {
+    'use strict';
+
+    object6 = new THREE.Object3D();
+    atom = new THREE.Object3D();
+
+    createBall6(atom);
+    createFirstRing6(atom);
+    createSecondRing6(atom);
+
+
+    atom.position.x = 20;
+    atom.position.y = 10;
+    atom.position.z = 5;
+
+    object6.add(atom);
+    scene.add(object6);
+}
+
+    function animateObject6() {
+
+        object6.rotation.x += 0.005;
+        object6.rotation.y += 0.005;
+
+        firstRing6.rotation.x += 0.025;
+        firstRing6.rotation.y += 0.025;
+
+        secondRing6.rotation.z += 0.025;
+        secondRing6.rotation.y += 0.025;
+    }
+
+
 
 
 
@@ -165,9 +241,14 @@ function createScene() {
     firstCreateBall(0,0,0);
     //-------------------------------------
 
+
     //-------------Fourth------------------
     fourthCreateSpin();
     //-------------------------------------
+
+    createObject6();
+
+
 }
 
 function createCamera() {
@@ -228,7 +309,7 @@ function render() {
 
 
 function createLight(){
-    const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    const directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
     scene.add( directionalLight );
 }
 
@@ -255,7 +336,12 @@ function animate() {
 
     animateFirst(); // First
 
+
     animateFourth();
+
+
+    animateObject6();
+   
 
     render();
     
