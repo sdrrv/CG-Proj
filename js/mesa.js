@@ -73,6 +73,54 @@ function animateFirst(){
 
 }
 
+//------------------------- FOURTH ----------------------------------
+var ring4, firstBall4, secondBall4, object4;
+
+function createRing4(obj) {
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(3.5,0.80,20,360,360);
+
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+
+    ring4 = new THREE.Mesh(geometry,material);
+
+    object4.position.x = 20;
+    object4.position.y = 10;
+    obj.add(ring4);
+}
+
+
+function createFirstBall4(obj){
+    'use strict';
+    const geometry = new THREE.SphereGeometry( 1, 100, 100, 0, 360, 0, 180 );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    firstBall4 = new THREE.Mesh( geometry, material );
+    firstBall4.position.set(0,-3.5/2, 0);
+    obj.add(firstBall4);
+}
+
+function createObject4() {
+    'use strict';
+    object4 = new THREE.Object3D();
+    createRing4(object4);
+    createFirstBall4(object4);
+
+    //object4.position.z = 5;
+
+    object4.add(ring4);
+    object4.add(firstBall4);
+    scene.add(object4);
+}
+
+let firstBall4y = 0
+function animateObject4() {
+    firstBall4y += 0.01;
+    //firstBall4.position.y = 3.2 * Math.abs(Math.sin(firstBall4y)) - 1.7;
+    firstBall4.position.y = 5 * Math.abs(Math.sin(firstBall4y));
+    firstBall4.position.x = Math.sqrt(3 * 3 - (firstBall4.position.y * firstBall4.position.y));
+}
+
 //------------------------- SIXTH ----------------------------------
 var ball6, firstRing6, secondRing6, atom, object6;
 
@@ -137,19 +185,17 @@ function createObject6() {
     scene.add(object6);
 }
 
-    function animateObject6() {
+function animateObject6() {
 
-        object6.rotation.x += 0.005;
-        object6.rotation.y += 0.005;
+    object6.rotation.x += 0.005;
+    object6.rotation.y += 0.005;
 
-        firstRing6.rotation.x += 0.025;
-        firstRing6.rotation.y += 0.025;
+    firstRing6.rotation.x += 0.025;
+    firstRing6.rotation.y += 0.025;
 
-        secondRing6.rotation.z += 0.025;
-        secondRing6.rotation.y += 0.025;
-    }
-
-
+    secondRing6.rotation.z += 0.025;
+    secondRing6.rotation.y += 0.025;
+}
 
 function createScene() {
     'use strict';
@@ -164,7 +210,9 @@ function createScene() {
     firstCreateRing2();
     firstCreateBall(0,0,0);
     //-------------------------------------
+    createObject4();
     createObject6();
+
 
 }
 
@@ -252,6 +300,7 @@ function animate() {
     'use strict';
 
     animateFirst(); // First
+    animateObject4();
     animateObject6();
     //atom.position.y += 0.01;
     render();
