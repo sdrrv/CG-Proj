@@ -3,7 +3,7 @@
 var camera, scene, renderer;
 
 //-------------------------FIRST------------------------------------
-var firstRing1, firstRing2, firstBall;
+let firstRing1, firstRing2, firstBall;
 
 function firstCreateRing1(){
     'use strict';
@@ -151,6 +151,82 @@ function createObject6() {
 
 
 
+
+
+//-------------------------------Fourth------------------------------------
+let fourthSpin, fourthPoll, fourthJumpingBall1, fourthJumpingBall2;
+let fourthInicialJumpingBallPos, fourthSpinner;
+
+function fourthCreateBall(radios = 1, color){
+    const geometry = new THREE.SphereGeometry(radios,100,100,0,360,0,180);
+    const material = new THREE.MeshToonMaterial({color: color});
+    let ball = new THREE.Mesh(geometry,material);
+
+    scene.add(ball);
+
+    return ball;
+}
+
+function fourthCreatePoll(width = 1, height = 1,depth = 1){
+    const geometry = new THREE.BoxGeometry(width,height,depth,1,1,1);
+    const material = new THREE.MeshToonMaterial({color: 0x5bba1a});
+    let poll = new THREE.Mesh(geometry, material);
+
+
+    scene.add(poll);
+    return poll;
+}
+
+function fourthCreateSpin(){
+    fourthSpin = new THREE.Object3D();
+    fourthSpin.add(fourthCreateBall(0.8, 0xffffff));
+    fourthPoll = fourthCreatePoll(15,0.5, 0.5);
+
+    fourthSpinner = new THREE.Object3D();
+
+    fourthJumpingBall1 = fourthCreateBall(0.8, 0xe01f70);
+    fourthJumpingBall1.position.x = -5;
+
+    fourthSpinner.add(fourthJumpingBall1)
+
+    fourthJumpingBall2 = fourthCreateBall(0.8, 0xe01f70);
+    fourthJumpingBall2.position.x = 5;
+
+    fourthSpinner.add(fourthJumpingBall2)
+
+
+
+    fourthSpin.add(fourthPoll);
+
+    fourthSpin.position.x = -10;
+    fourthSpin.position.y = -5;
+    fourthSpin.position.z = 10;
+
+    fourthSpinner.position.x = -10;
+    fourthSpinner.position.y = -5;
+    fourthSpinner.position.z = 10;
+
+    scene.add(fourthSpin);
+    scene.add(fourthSpinner);
+    fourthInicialJumpingBallPos = fourthJumpingBall1.position.y;
+
+}
+
+let fourthSpinRotationSpeed = .01;
+let fourthJumping = 0;
+
+function animateFourth(){
+    fourthSpin.rotation.y += fourthSpinRotationSpeed;
+    fourthJumping += 0.02;
+    fourthJumpingBall1.position.y = (3 * Math.cos(fourthJumping)) +  fourthInicialJumpingBallPos;
+    fourthJumpingBall2.position.y = (3 * Math.cos(fourthJumping)) +  fourthInicialJumpingBallPos;
+    fourthSpinner.rotation.y += -fourthSpinRotationSpeed;
+
+
+}
+
+
+
 function createScene() {
     'use strict';
     
@@ -164,7 +240,14 @@ function createScene() {
     firstCreateRing2();
     firstCreateBall(0,0,0);
     //-------------------------------------
+
+
+    //-------------Fourth------------------
+    fourthCreateSpin();
+    //-------------------------------------
+
     createObject6();
+
 
 }
 
@@ -252,8 +335,14 @@ function animate() {
     'use strict';
 
     animateFirst(); // First
+
+
+    animateFourth();
+
+
     animateObject6();
-    //atom.position.y += 0.01;
+   
+
     render();
     
     requestAnimationFrame(animate);
