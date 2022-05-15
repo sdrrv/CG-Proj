@@ -136,6 +136,68 @@ function createAtom(obj) {
 
 }
 
+// --------------------------Second----------------------------------
+var secondObject, secondSubObject1, secondSubObject2, secondRing1, secondBall1;
+function createObject2(){
+    'use strict'
+    secondObject = new THREE.Object3D();
+    secondSubObject1 = new THREE.Object3D();
+    secondSubObject2 = new THREE.Object3D();
+
+    secondObject.position.set(14, 15, -20);
+    secondObject.add(secondSubObject1);
+    secondObject.add(secondSubObject2);
+
+    createSecondBall1();
+    createSecondBall2();
+    createSecondRing1();
+    scene.add(secondObject);
+}
+
+function createSecondBall1(){
+    'use strict';
+    const geometry = new THREE.SphereGeometry(2, 100, 100, 0, 360, 0, 180);
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    secondBall1 = new THREE.Mesh( geometry, material );
+    secondBall1.position.set(-4.1, 0, 0);
+    secondSubObject1.add(secondBall1);
+}
+
+function createSecondBall2(){
+    'use strict';
+    const geometry = new THREE.SphereGeometry(2, 100, 100, 0, 360, 0, 180);
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    secondBall1 = new THREE.Mesh( geometry, material );
+    secondBall1.position.set(-10.9, 0, 0);
+    secondSubObject2.add(secondBall1);
+}
+
+function createSecondRing1(){
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(8, 1, 20, 360, 360);
+
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+
+    secondRing1 = new THREE.Mesh(geometry,material);
+
+    secondRing1.rotation.x = Math.PI/2;
+    secondRing1.rotation.y = 0;
+    secondRing1.rotation.z = 0;
+
+    secondObject.add(secondRing1);
+}
+
+let secondSubObject1RotationSpeed = 0.04;
+let secondSubObject2RotationSpeed = 0.015;
+
+function animateSecondObject(){
+    secondObject.rotation.x += 0.01;
+    secondObject.rotation.z += 0.01;
+    secondSubObject1.rotation.y += secondSubObject1RotationSpeed;
+    secondSubObject2.rotation.y += secondSubObject2RotationSpeed;
+}
+
 function createObject6() {
     'use strict';
 
@@ -265,8 +327,7 @@ function createScene() {
 
     createObject6();
 
-
-
+    createObject2();
 }
 
 function createCamera() {
@@ -359,7 +420,9 @@ function animate() {
 
 
     animateObject6();
-   
+
+    
+    animateSecondObject();
 
     render();
     
