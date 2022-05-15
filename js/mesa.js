@@ -3,7 +3,7 @@
 var camera, scene, renderer;
 
 //-------------------------FIRST------------------------------------
-var firstRing1, firstRing2, firstBall;
+var firstRing1, firstRing2, firstBall, object1;
 
 function firstCreateRing1(){
     'use strict';
@@ -51,6 +51,11 @@ function firstCreateRing2(){
 
 
     scene.add(firstRing2);
+}
+
+function createObject1() {
+    'use strict';
+    object1 = new THREE.Object3D();
 }
 
 let firstBallSpeed = 0;
