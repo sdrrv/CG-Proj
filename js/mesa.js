@@ -307,6 +307,138 @@ function animateSecondObject(){
     secondSubObject2.rotation.y += secondSubObject2RotationSpeed;
 }
 
+//-----------------------------------Seventh---------------------------------------------------------
+var seventhObject, seventhRing1, seventhBall1, seventhBall2;
+function createObject7(){
+    'use strict'
+    seventhObject = new THREE.Object3D();
+    seventhObject.position.set(-35, 10, -30);
+
+    createSeventhRing1();
+    createSeventhBall1();
+    createSeventhBall2();
+    scene.add(seventhObject);
+}
+
+function createSeventhRing1(){
+    'use strict';
+
+    const geometry = new THREE.TorusGeometry(8, 0.5, 20, 360, 360);
+
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+
+    seventhRing1 = new THREE.Mesh(geometry,material);
+
+    seventhRing1.rotation.x = Math.PI/2;
+    seventhRing1.rotation.y = 0;
+    seventhRing1.rotation.z = 0;
+
+    seventhObject.add(seventhRing1);
+}
+
+function createSeventhBall1(){
+    'use strict';
+    const geometry = new THREE.SphereGeometry(1, 100, 100, 0, 360, 0, 180);
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    seventhBall1 = new THREE.Mesh( geometry, material );
+    seventhBall1.position.set(-7.4, 1.3, 0);
+    seventhObject.add(seventhBall1);
+}
+
+function createSeventhBall2(){
+    'use strict';
+    const geometry = new THREE.SphereGeometry(1, 100, 100, 0, 360, 0, 180);
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    seventhBall2 = new THREE.Mesh( geometry, material );
+    seventhBall2.position.set(7.4, 1.3, 0);
+    seventhObject.add(seventhBall2);
+}
+
+let seventhObjectRotationSpeed = 0.05
+function animateSeventhObject(){
+    seventhObject.rotation.y += seventhObjectRotationSpeed
+    seventhObject.rotation.z += seventhObjectRotationSpeed/1000
+    seventhObject.rotation.x += seventhObjectRotationSpeed/1000
+}
+
+//----------------------------------Imposter---------------------------------------------
+var imposterObject, imposterBelly, imposterHip, imposterBackPack, imposterLeg1, imposterLeg2, imposterVisor;
+let imposterHight = 3, imposterRadious = 2, imposterColour = 0x800080 ;
+function createImposter(){
+    'use strinct'
+    imposterObject = new THREE.Object3D();
+    imposterObject.position.set(-65, 0, -20);
+    imposterObject.rotation.x = -Math.PI/4;
+    imposterObject.rotation.y = Math.PI/1.4;
+
+    createImposterBelly();
+    createImposterHip();
+    createImposterLeg1();
+    createImposterLeg2();
+    createImposterVisor();
+    createImposterBackpack();
+    scene.add(imposterObject);
+}
+
+function createImposterBelly(){
+    'use strinct'
+    const geometry = new THREE.CapsuleGeometry(imposterRadious, imposterHight, 100, 100);
+    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    imposterBelly = new THREE.Mesh(geometry, material);
+    imposterBelly.position.set(0, 0, 0);
+    imposterObject.add(imposterBelly);
+}
+function createImposterHip(){
+    const geometry = new THREE.CylinderGeometry(imposterRadious, imposterRadious, imposterHight, 100, 100, false, 0, Math.PI*2);
+    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    imposterHip = new THREE.Mesh(geometry, material);
+    imposterHip.position.set(0, -imposterHight/2*1.4, 0);
+    imposterObject.add(imposterHip);
+
+}
+
+function createImposterLeg1(){
+    const geometry = new THREE.CapsuleGeometry(imposterRadious/2.8, imposterHight/1.5, 100, 100);
+    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    imposterLeg1 = new THREE.Mesh(geometry, material);
+    imposterLeg1.position.set(imposterRadious/1.55, -(imposterHight + imposterHight/2), 0);
+    imposterObject.add(imposterLeg1);
+}
+
+function createImposterLeg2(){
+    const geometry = new THREE.CapsuleGeometry(imposterRadious/2.8, imposterHight/1.5, 100, 100);
+    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    imposterLeg2 = new THREE.Mesh(geometry, material);
+    imposterLeg2.position.set(-imposterRadious/1.55, -(imposterHight + imposterHight/2), 0);
+    imposterObject.add(imposterLeg2);
+}
+
+function createImposterVisor(){
+    const geometry = new THREE.CylinderGeometry(imposterRadious*1.01, imposterRadious*1.01, imposterHight/2, 100, 100, true, -Math.PI/4, Math.PI/2);
+    const material = new THREE.MeshToonMaterial( { color: 0x1ca8ff } );
+    imposterVisor = new THREE.Mesh(geometry, material);
+    imposterVisor.position.set(0, imposterHight/2.3, 0);
+    imposterObject.add(imposterVisor);
+}
+
+function createImposterBackpack(){
+    const geometry = new THREE.CapsuleGeometry(imposterRadious/1.5, imposterHight/1.5, 100, 100);
+    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    imposterBackPack = new THREE.Mesh(geometry, material);
+    imposterBackPack.position.set(0, -imposterHight/4, -imposterRadious);
+    imposterObject.add(imposterBackPack);
+}
+
+let imposterSpeed = 0.01, imposterCosMoving = 0, imposterLegsMoving = 0;
+function animateImposter(){
+    'use strict';
+    imposterCosMoving += imposterSpeed
+    imposterLegsMoving += imposterSpeed*6
+    imposterObject.position.x += Math.cos(imposterCosMoving)/20;
+    imposterLeg1.position.z += Math.cos(imposterLegsMoving)/60;
+    imposterLeg2.position.z += -Math.cos(imposterLegsMoving)/60;
+}
+
 function createObject6() {
     'use strict';
 
@@ -437,6 +569,9 @@ function createScene() {
 
     createObject2();
 
+    createImposter();
+    createObject7();
+
 }
 
 function createCamera() {
@@ -533,7 +668,8 @@ function animate() {
 
     
     animateSecondObject();
-
+    animateSeventhObject();
+    animateImposter();
     render();
     
     requestAnimationFrame(animate);
