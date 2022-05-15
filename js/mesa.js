@@ -73,6 +73,67 @@ function animateFirst(){
 
 }
 
+//------------------------- THIRD ----------------------------------
+
+var firstTable3, secondTable3, firstBall3, secondBall3, object3, subObject3, subSubObject3;
+
+function addTable3(obj, x, y, z, color, num) {
+    'use strict';
+    const geometry = new THREE.BoxGeometry(15, 2, 8);
+    const material = new THREE.MeshToonMaterial({color : color});
+    if (num === 1){
+        firstTable3 = new THREE.Mesh(geometry, material);
+        firstTable3.position.set(x, y, z);
+        obj.add(firstTable3);
+    }
+    else {
+        subObject3 = new THREE.Object3D();
+        secondTable3 = new THREE.Mesh(geometry, material);
+        secondTable3.position.set(x - firstBall3.position.x, 0, 0);
+        subObject3.add(secondTable3);
+        subObject3.position.set(firstBall3.position.x, y,z)
+        obj.add(subObject3);
+    }
+
+}
+
+function addBall3(obj, x, y, z, color, num) {
+    'use strict';
+    const geometry = new THREE.SphereGeometry(1.8, 100, 100, 0, 360, 0, 180 );
+    const material = new THREE.MeshToonMaterial( { color: color } );
+    if (num === 1) {
+        firstBall3 = new THREE.Mesh( geometry, material );
+        firstBall3.position.set(x, y, z);
+        obj.add(firstBall3);
+    }
+    else {
+        subSubObject3 = new THREE.Object3D();
+        secondBall3 = new THREE.Mesh(geometry, material);
+        subSubObject3.position.set(15 - 4, 2.8, 0)
+        subSubObject3.add(secondBall3);
+        subObject3.add(subSubObject3);
+    }
+}
+
+function createObject3() {
+    object3 = new THREE.Object3D();
+    addTable3(object3, 0, 0, 0, 0x1ca8ff, 1);
+    addBall3(object3, 6, 2.8, 0, 0xfc03c6, 1);
+    addTable3(object3, 11, 5.6, 0, 0x1ca8ff, 2);
+    addBall3(object3, 17, 8.4, 0, 0xfc03c6, 2);
+    scene.add(object3);
+}
+
+let ballSpeed = 0;
+function animateObject3() {
+    object3.rotation.y += 0.01;
+    subObject3.rotation.y += 0.01;
+    //secondBall3.rotation.y -= 0.01;
+    ballSpeed += 0.01
+    subSubObject3.position.y = 8 * Math.abs(Math.sin(ballSpeed)) + 2.8 ;
+}
+
+
 //------------------------- FOURTH ----------------------------------
 var ring4, firstBall4, secondBall4, object4;
 
@@ -206,11 +267,12 @@ function createScene() {
     scene.add(new THREE.AxisHelper(10));
 
     //-----------------First--------------
-    firstCreateRing1();
-    firstCreateRing2();
-    firstCreateBall(0,0,0);
+    //firstCreateRing1();
+    //firstCreateRing2();
+    //firstCreateBall(0,0,0);
     //-------------------------------------
-    createObject4();
+    createObject3();
+    //createObject4();
     createObject6();
 
 
@@ -299,8 +361,9 @@ function init() {
 function animate() {
     'use strict';
 
-    animateFirst(); // First
-    animateObject4();
+    //animateFirst(); // First
+    animateObject3();
+    //animateObject4();
     animateObject6();
     //atom.position.y += 0.01;
     render();
