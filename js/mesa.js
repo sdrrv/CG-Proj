@@ -5,7 +5,7 @@ var camera, scene, renderer;
 //-------------------------FIRST------------------------------------
 var firstRing1, firstRing2, firstBall, object1;
 
-function firstCreateRing1(){
+function firstCreateRing1(obj){
     'use strict';
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
@@ -18,10 +18,10 @@ function firstCreateRing1(){
     firstRing1.rotation.z = 0;
 
 
-    scene.add(firstRing1);
+    obj.add(firstRing1);
 }
 
-function firstCreateBall(x, y ,z){
+function firstCreateBall(obj, x, y ,z){
     'use strict';
 
     const geometry = new THREE.SphereGeometry(1,100,100,0,360,0,180);
@@ -33,11 +33,11 @@ function firstCreateBall(x, y ,z){
     firstBall.position.z = z;
 
 
-    scene.add(firstBall);
+    obj.add(firstBall);
 
 }
 
-function firstCreateRing2(){
+function firstCreateRing2(obj){
     'use strict';
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
@@ -50,12 +50,19 @@ function firstCreateRing2(){
     firstRing2.rotation.z = 0;
 
 
-    scene.add(firstRing2);
+    obj.add(firstRing2);
 }
 
 function createObject1() {
     'use strict';
     object1 = new THREE.Object3D();
+    firstCreateRing1(object1);
+    firstCreateBall(object1, 0, 0, 0);
+    firstCreateRing2(object1);
+
+    object1.position.set(0,5,23);
+    scene.add(object1);
+
 }
 
 let firstBallSpeed = 0;
@@ -68,6 +75,9 @@ function animateFirst(){
     firstBallSpeed += 0.01;
 
     let scaleFactor = 3 * (Math.cos(firstRingSpeed));
+    console.log(scaleFactor)
+    if (Math.abs(scaleFactor) < 1)
+        scaleFactor = 1;
     firstRing1.scale.set(scaleFactor,scaleFactor,scaleFactor);
     firstRing1.position.y = Math.abs(3 * Math.sin(firstRingSpeed));
 
@@ -75,6 +85,9 @@ function animateFirst(){
     firstRing2.scale.set(scaleFactor2,scaleFactor2,scaleFactor2);
     firstRing2.position.y = Math.abs(5 * Math.cos(firstRingSpeed));
     firstBall.position.y = 4 * Math.sin(firstBallSpeed);
+
+    object1.rotation.x += 0.005;
+    object1.rotation.z += 0.005;
 
 }
 
@@ -146,10 +159,9 @@ function createScene() {
     scene.add(new THREE.AxisHelper(10));
 
     //-----------------First--------------
-    firstCreateRing1();
-    firstCreateRing2();
-    firstCreateBall(0,0,0);
+    createObject1();
     //-------------------------------------
+    //createObject6();
 }
 
 function createCamera() {
