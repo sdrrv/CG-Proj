@@ -1,6 +1,7 @@
 /*global THREE, requestAnimationFrame, console*/
 
 var camera, scene, renderer;
+let wireframeBool = false;
 
 //-------------------------FIRST------------------------------------
 var firstRing1, firstRing2, firstBall, object1;
@@ -10,7 +11,7 @@ function firstCreateRing1(obj){
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
 
     firstRing1 = new THREE.Mesh(geometry,material);
     firstRing1.rotation.x = Math.PI / 2;
@@ -25,7 +26,7 @@ function firstCreateBall(obj, x, y ,z){
     'use strict';
 
     const geometry = new THREE.SphereGeometry(1,100,100,0,360,0,180);
-    const material = new THREE.MeshNormalMaterial({color: 0x5bba1a});
+    const material = new THREE.MeshNormalMaterial({color: 0x5bba1a, wireframe: wireframeBool});
     firstBall = new THREE.Mesh(geometry,material);
 
     firstBall.position.x = x;
@@ -42,7 +43,7 @@ function firstCreateRing2(obj){
 
     const geometry = new THREE.TorusGeometry(1.24,0.20,8,360,360);
 
-    const material = new THREE.MeshToonMaterial({color: 0xde28db});
+    const material = new THREE.MeshToonMaterial({color: 0xde28db, wireframe: wireframeBool});
 
     firstRing2 = new THREE.Mesh(geometry,material);
     firstRing2.rotation.x = Math.PI / 2;
@@ -97,7 +98,7 @@ var firstTable3, secondTable3, firstBall3, secondBall3, object3, subObject3, sub
 function addTable3(obj, x, y, z, color, num) {
     'use strict';
     const geometry = new THREE.BoxGeometry(15, 2, 8);
-    const material = new THREE.MeshToonMaterial({color : color});
+    const material = new THREE.MeshToonMaterial({color : color, wireframe: wireframeBool});
     if (num === 1){
         firstTable3 = new THREE.Mesh(geometry, material);
         firstTable3.position.set(x, y, z);
@@ -117,7 +118,7 @@ function addTable3(obj, x, y, z, color, num) {
 function addBall3(obj, x, y, z, color, num) {
     'use strict';
     const geometry = new THREE.SphereGeometry(1.8, 100, 100, 0, 360, 0, 180 );
-    const material = new THREE.MeshToonMaterial( { color: color } );
+    const material = new THREE.MeshToonMaterial( { color: color , wireframe: wireframeBool} );
     if (num === 1) {
         firstBall3 = new THREE.Mesh( geometry, material );
         firstBall3.position.set(x, y, z);
@@ -159,7 +160,7 @@ function createRing4(obj) {
 
     const geometry = new THREE.TorusGeometry(3.5,0.80,20,360,360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
 
     ring4 = new THREE.Mesh(geometry,material);
 
@@ -172,7 +173,7 @@ function createRing4(obj) {
 function createFirstBall4(obj){
     'use strict';
     const geometry = new THREE.SphereGeometry( 1, 100, 100, 0, 360, 0, 180 );
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 ,wireframe: wireframeBool} );
     firstBall4 = new THREE.Mesh( geometry, material );
     firstBall4.position.set(0,-3.5/2, 0);
     obj.add(firstBall4);
@@ -205,7 +206,7 @@ var ball6, firstRing6, secondRing6, atom, object6;
 function createBall6(obj){
     'use strict';
     const geometry = new THREE.SphereGeometry( 1, 100, 100, 0, 360, 0, 180 );
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 , wireframe: wireframeBool} );
     ball6 = new THREE.Mesh( geometry, material );
     ball6.position.set(0,0,0);
     obj.add(ball6);
@@ -216,7 +217,7 @@ function createFirstRing6(obj) {
 
     const geometry = new THREE.TorusGeometry(2,0.10,20,360,360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
 
     firstRing6 = new THREE.Mesh(geometry,material);
 
@@ -232,7 +233,7 @@ function createSecondRing6(obj) {
 
     const geometry = new THREE.TorusGeometry(2.5,0.10,20,360,360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x510391});
+    const material = new THREE.MeshToonMaterial({color: 0x510391,wireframe: wireframeBool});
 
     secondRing6 = new THREE.Mesh(geometry,material);
 
@@ -265,7 +266,7 @@ function createObject2(){
 function createSecondBall1(){
     'use strict';
     const geometry = new THREE.SphereGeometry(2, 100, 100, 0, 360, 0, 180);
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6, wireframe: wireframeBool } );
     secondBall1 = new THREE.Mesh( geometry, material );
     secondBall1.position.set(-4.1, 0, 0);
     secondSubObject1.add(secondBall1);
@@ -274,7 +275,7 @@ function createSecondBall1(){
 function createSecondBall2(){
     'use strict';
     const geometry = new THREE.SphereGeometry(2, 100, 100, 0, 360, 0, 180);
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6, wireframe: wireframeBool } );
     secondBall1 = new THREE.Mesh( geometry, material );
     secondBall1.position.set(-10.9, 0, 0);
     secondSubObject2.add(secondBall1);
@@ -285,7 +286,7 @@ function createSecondRing1(){
 
     const geometry = new THREE.TorusGeometry(8, 1, 20, 360, 360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
 
     secondRing1 = new THREE.Mesh(geometry,material);
 
@@ -324,7 +325,7 @@ function createSeventhRing1(){
 
     const geometry = new THREE.TorusGeometry(8, 0.5, 20, 360, 360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff});
+    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
 
     seventhRing1 = new THREE.Mesh(geometry,material);
 
@@ -338,7 +339,7 @@ function createSeventhRing1(){
 function createSeventhBall1(){
     'use strict';
     const geometry = new THREE.SphereGeometry(1, 100, 100, 0, 360, 0, 180);
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6, wireframe: wireframeBool } );
     seventhBall1 = new THREE.Mesh( geometry, material );
     seventhBall1.position.set(-7.4, 1.3, 0);
     seventhObject.add(seventhBall1);
@@ -347,7 +348,7 @@ function createSeventhBall1(){
 function createSeventhBall2(){
     'use strict';
     const geometry = new THREE.SphereGeometry(1, 100, 100, 0, 360, 0, 180);
-    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6 } );
+    const material = new THREE.MeshToonMaterial( { color: 0xfc03c6, wireframe: wireframeBool } );
     seventhBall2 = new THREE.Mesh( geometry, material );
     seventhBall2.position.set(7.4, 1.3, 0);
     seventhObject.add(seventhBall2);
@@ -382,14 +383,14 @@ function createImposter(){
 function createImposterBelly(){
     'use strinct'
     const geometry = new THREE.CapsuleGeometry(imposterRadious, imposterHight, 100, 100);
-    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    const material = new THREE.MeshToonMaterial( { color: imposterColour , wireframe: wireframeBool} );
     imposterBelly = new THREE.Mesh(geometry, material);
     imposterBelly.position.set(0, 0, 0);
     imposterObject.add(imposterBelly);
 }
 function createImposterHip(){
     const geometry = new THREE.CylinderGeometry(imposterRadious, imposterRadious, imposterHight, 100, 100, false, 0, Math.PI*2);
-    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    const material = new THREE.MeshToonMaterial( { color: imposterColour, wireframe: wireframeBool } );
     imposterHip = new THREE.Mesh(geometry, material);
     imposterHip.position.set(0, -imposterHight/2*1.4, 0);
     imposterObject.add(imposterHip);
@@ -398,7 +399,7 @@ function createImposterHip(){
 
 function createImposterLeg1(){
     const geometry = new THREE.CapsuleGeometry(imposterRadious/2.8, imposterHight/1.5, 100, 100);
-    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    const material = new THREE.MeshToonMaterial( { color: imposterColour, wireframe: wireframeBool } );
     imposterLeg1 = new THREE.Mesh(geometry, material);
     imposterLeg1.position.set(imposterRadious/1.55, -(imposterHight + imposterHight/2), 0);
     imposterObject.add(imposterLeg1);
@@ -406,7 +407,7 @@ function createImposterLeg1(){
 
 function createImposterLeg2(){
     const geometry = new THREE.CapsuleGeometry(imposterRadious/2.8, imposterHight/1.5, 100, 100);
-    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    const material = new THREE.MeshToonMaterial( { color: imposterColour, wireframe: wireframeBool } );
     imposterLeg2 = new THREE.Mesh(geometry, material);
     imposterLeg2.position.set(-imposterRadious/1.55, -(imposterHight + imposterHight/2), 0);
     imposterObject.add(imposterLeg2);
@@ -414,7 +415,7 @@ function createImposterLeg2(){
 
 function createImposterVisor(){
     const geometry = new THREE.CylinderGeometry(imposterRadious*1.01, imposterRadious*1.01, imposterHight/2, 100, 100, true, -Math.PI/4, Math.PI/2);
-    const material = new THREE.MeshToonMaterial( { color: 0x1ca8ff } );
+    const material = new THREE.MeshToonMaterial( { color: 0x1ca8ff, wireframe: wireframeBool } );
     imposterVisor = new THREE.Mesh(geometry, material);
     imposterVisor.position.set(0, imposterHight/2.3, 0);
     imposterObject.add(imposterVisor);
@@ -422,7 +423,7 @@ function createImposterVisor(){
 
 function createImposterBackpack(){
     const geometry = new THREE.CapsuleGeometry(imposterRadious/1.5, imposterHight/1.5, 100, 100);
-    const material = new THREE.MeshToonMaterial( { color: imposterColour } );
+    const material = new THREE.MeshToonMaterial( { color: imposterColour, wireframe: wireframeBool } );
     imposterBackPack = new THREE.Mesh(geometry, material);
     imposterBackPack.position.set(0, -imposterHight/4, -imposterRadious);
     imposterObject.add(imposterBackPack);
@@ -477,7 +478,7 @@ let fourthInicialJumpingBallPos, fourthSpinner;
 
 function fourthCreateBall(radios = 1, color){
     const geometry = new THREE.SphereGeometry(radios,100,100,0,360,0,180);
-    const material = new THREE.MeshToonMaterial({color: color});
+    const material = new THREE.MeshToonMaterial({color: color, wireframe: wireframeBool});
     let ball = new THREE.Mesh(geometry,material);
 
     scene.add(ball);
@@ -487,7 +488,7 @@ function fourthCreateBall(radios = 1, color){
 
 function fourthCreatePoll(width = 1, height = 1,depth = 1){
     const geometry = new THREE.BoxGeometry(width,height,depth,1,1,1);
-    const material = new THREE.MeshToonMaterial({color: 0x5bba1a});
+    const material = new THREE.MeshToonMaterial({color: 0x5bba1a, wireframe: wireframeBool});
     let poll = new THREE.Mesh(geometry, material);
 
 
@@ -635,23 +636,10 @@ function onKeyDown(e) {
     'use strict';
     
     switch (e.keyCode) {
-    case 65: //A
-    case 97: //a
+    case 52: //4
         scene.traverse(function (node) {
             if (node instanceof THREE.Mesh) {
                 node.material.wireframe = !node.material.wireframe;
-            }
-        });
-        break;
-    case 83:  //S
-    case 115: //s
-        ball.userData.jumping = !ball.userData.jumping;
-        break;
-    case 69:  //E
-    case 101: //e
-        scene.traverse(function (node) {
-            if (node instanceof THREE.AxisHelper) {
-                node.visible = !node.visible;
             }
         });
         break;
@@ -667,6 +655,7 @@ function onKeyDown(e) {
         case 51: //3
             createSideCamera();
             break;
+
     }
 }
 
