@@ -75,7 +75,6 @@ function animateFirst(){
     firstBallSpeed += 0.01;
 
     let scaleFactor = 3 * (Math.cos(firstRingSpeed));
-    console.log(scaleFactor)
     if (Math.abs(scaleFactor) < 1)
         scaleFactor = 1;
     firstRing1.scale.set(scaleFactor,scaleFactor,scaleFactor);
@@ -562,7 +561,7 @@ function createScene() {
 
 
     //-------------Fourth------------------
-    //fourthCreateSpin();
+    fourthCreateSpin();
     //-------------------------------------
 
     createObject6();
@@ -574,15 +573,49 @@ function createScene() {
 
 }
 
-function createCamera() {
+function createMainCamera() {
     'use strict';
     camera = new THREE.PerspectiveCamera(70,
                                          window.innerWidth / window.innerHeight,
                                          1,
                                          1000);
-    camera.position.x = 20;
-    camera.position.y = 20;
-    camera.position.z = 20;
+    camera.position.x = 30;
+    camera.position.y = 30;
+    camera.position.z = 30;
+    camera.lookAt(scene.position);
+}
+
+
+function createOrtogonalCamera() {
+    'use strict';
+    camera = new THREE.OrthographicCamera( window.innerWidth/-2, window.innerWidth / 2, window.innerHeight/2,window.innerHeight/-2,1,1000);
+    camera.position.x = 30;
+    camera.position.y = 0;
+    camera.position.z = 0;
+    camera.zoom =10;
+    camera.updateProjectionMatrix();
+    camera.lookAt(scene.position);
+}
+
+function createTopCamera() {
+    'use strict';
+    camera = new THREE.OrthographicCamera( window.innerWidth/-2, window.innerWidth / 2, window.innerHeight/2,window.innerHeight/-2,1,1000);
+    camera.position.x = 0;
+    camera.position.y = 30;
+    camera.position.z = 0;
+    camera.zoom =10;
+    camera.updateProjectionMatrix();
+    camera.lookAt(scene.position);
+}
+
+function createSideCamera() {
+    'use strict';
+    camera = new THREE.OrthographicCamera( window.innerWidth/-2, window.innerWidth / 2, window.innerHeight/2,window.innerHeight/-2,1,1000);
+    camera.position.x = 0;
+    camera.position.y = 0;
+    camera.position.z = 30;
+    camera.zoom =10;
+    camera.updateProjectionMatrix();
     camera.lookAt(scene.position);
 }
 
@@ -622,6 +655,18 @@ function onKeyDown(e) {
             }
         });
         break;
+        case 49: //1
+            createOrtogonalCamera();
+            break;
+        case 48: //0
+            createMainCamera();
+            break;
+        case 50: //2
+            createTopCamera();
+            break;
+        case 51: //3
+            createSideCamera();
+            break;
     }
 }
 
@@ -632,7 +677,7 @@ function render() {
 
 
 function createLight(){
-    const directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     scene.add( directionalLight );
 }
 
@@ -645,7 +690,7 @@ function init() {
     document.body.appendChild(renderer.domElement);
    
     createScene();
-    createCamera();
+    createMainCamera();
     createLight();
     
     render();
@@ -661,7 +706,7 @@ function animate() {
     animateFirst(); // First
     animateObject3();
 
-    //animateFourth();
+    animateFourth();
 
 
     animateObject6();
