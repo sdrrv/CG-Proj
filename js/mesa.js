@@ -3,6 +3,8 @@
 var camera, scene, renderer;
 let wireframeBool = false;
 
+var qdown, wdown, adown, sdown, zdown, xdown;
+
 //-------------------------FIRST------------------------------------
 var firstRing1, firstRing2, firstBall, object1;
 
@@ -125,7 +127,7 @@ function addTable3(obj, x, y, z, color, num) {
 
 function addBall3(obj, x, y, z, color, num) {
     'use strict';
-    const geometry = new THREE.SphereGeometry(1.8, 100, 100, 0, 360, 0, 180 );
+    const geometry = new THREE.SphereGeometry(1.8, 64, 32, 0, 360, 0, 180 );
     const material = new THREE.MeshToonMaterial( { color: color , wireframe: wireframeBool} );
     if (num === 1) {
         firstBall3 = new THREE.Mesh( geometry, material );
@@ -157,9 +159,24 @@ function createObject3() {
 
 let ballSpeed = 0;
 function animateObject3() {
-    object3.rotation.y += 0.01;
-    subObject3.rotation.y += 0.01;
-    subSubObject3.rotation.y += 0.01;
+    if (qdown){
+        object3.rotation.y += 0.01;
+    }
+    if (wdown){
+        object3.rotation.y -= 0.01;
+    }
+    if(adown){
+        subObject3.rotation.y += 0.01;
+    }
+    if(sdown){
+        subObject3.rotation.y -= 0.01;
+    }
+    if(zdown){
+        subSubObject3.rotation.y += 0.01;
+    }
+    if(xdown){
+        subSubObject3.rotation.y -= 0.01;
+    }
     //secondBall3.rotation.y -= 0.01;
     ballSpeed += 0.01
     thirdBall3.position.y = 8 * Math.abs(Math.sin(ballSpeed)) + 2.8 ;
@@ -669,7 +686,50 @@ function onKeyDown(e) {
         case 51: //3
             createSideCamera();
             break;
+        case 81: // q
+            qdown = true;
+            break;
+        case 87: //w
+            wdown = true;
+            break;
+        case 65: //a
+            adown = true;
+            break;
+        case 83: //s
+            sdown = true;
+            break;
+        case 90: //z
+            zdown = true;
+            break;
+        case 88: //x
+            xdown = true;
+            break;
 
+    }
+}
+
+function onKeyUp(e) {
+    'use strict';
+
+    switch (e.keyCode) {
+        case 81: // q
+            qdown = false;
+            break;
+        case 87: //w
+            wdown = false;
+            break;
+        case 65: //a
+            adown = false;
+            break;
+        case 83: //s
+            sdown = false;
+            break;
+        case 90: //z
+            zdown = false;
+            break;
+        case 88: //x
+            xdown = false;
+            break;
     }
 }
 
@@ -699,6 +759,7 @@ function init() {
     render();
     
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
     window.addEventListener("resize", onResize);
 }
 
