@@ -93,7 +93,7 @@ function animateFirst(){
 
 //------------------------- THIRD ----------------------------------
 
-var firstTable3, secondTable3, firstBall3, secondBall3, object3, subObject3, subSubObject3;
+var firstTable3, secondTable3, firstBall3, thirdBall3, secondBall3,thirdTable3, object3, subObject3, subSubObject3;
 
 function addTable3(obj, x, y, z, color, num) {
     'use strict';
@@ -104,13 +104,21 @@ function addTable3(obj, x, y, z, color, num) {
         firstTable3.position.set(x, y, z);
         obj.add(firstTable3);
     }
-    else {
+    else if (num === 2) {
         subObject3 = new THREE.Object3D();
         secondTable3 = new THREE.Mesh(geometry, material);
         secondTable3.position.set(x - firstBall3.position.x, 0, 0);
         subObject3.add(secondTable3);
         subObject3.position.set(firstBall3.position.x, y,z)
         obj.add(subObject3);
+    }
+    else if (num === 3) {
+        subSubObject3 = new THREE.Object3D();
+        thirdTable3 = new THREE.Mesh(geometry, material);
+        thirdTable3.position.set(x - secondBall3.position.x, 0, 0);
+        subSubObject3.add(thirdTable3);
+        subSubObject3.position.set(secondBall3.position.x, y,z)
+        obj.add(subSubObject3);
     }
 
 }
@@ -124,12 +132,15 @@ function addBall3(obj, x, y, z, color, num) {
         firstBall3.position.set(x, y, z);
         obj.add(firstBall3);
     }
+    else if (num === 3) {
+        thirdBall3 = new THREE.Mesh( geometry, material );
+        thirdBall3.position.set(x, y, z);
+        obj.add(thirdBall3);
+    }
     else {
-        subSubObject3 = new THREE.Object3D();
         secondBall3 = new THREE.Mesh(geometry, material);
-        subSubObject3.position.set(15 - 4, 2.8, 0)
-        subSubObject3.add(secondBall3);
-        subObject3.add(subSubObject3);
+        secondBall3.position.set(15 - 4, 2.8, 0)
+        subObject3.add(secondBall3);
     }
 }
 
@@ -139,6 +150,8 @@ function createObject3() {
     addBall3(object3, 6, 2.8, 0, 0xfc03c6, 1);
     addTable3(object3, 11, 5.6, 0, 0x1ca8ff, 2);
     addBall3(object3, 17, 8.4, 0, 0xfc03c6, 2);
+    addTable3(subObject3, 6, 5.6, 0, 0x1ca8ff, 3);
+    addBall3(subSubObject3, -10, 2.8, 0, 0xfc03c6, 3);
     scene.add(object3);
 }
 
@@ -146,9 +159,10 @@ let ballSpeed = 0;
 function animateObject3() {
     object3.rotation.y += 0.01;
     subObject3.rotation.y += 0.01;
+    subSubObject3.rotation.y += 0.01;
     //secondBall3.rotation.y -= 0.01;
     ballSpeed += 0.01
-    subSubObject3.position.y = 8 * Math.abs(Math.sin(ballSpeed)) + 2.8 ;
+    thirdBall3.position.y = 8 * Math.abs(Math.sin(ballSpeed)) + 2.8 ;
 }
 
 
