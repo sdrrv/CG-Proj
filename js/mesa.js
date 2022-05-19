@@ -63,7 +63,7 @@ function createObject1() {
     firstCreateBall(object1, 0, 0, 0);
     firstCreateRing2(object1);
 
-    object1.position.set(0,5,23);
+    object1.position.set(-5,10,23);
     scene.add(object1);
 
 }
@@ -304,7 +304,7 @@ function createObject2(){
     secondSubObject1 = new THREE.Object3D();
     secondSubObject2 = new THREE.Object3D();
 
-    secondObject.position.set(14, 15, -20);
+    secondObject.position.set(18, 19, -24);
     secondObject.add(secondSubObject1);
     secondObject.add(secondSubObject2);
 
@@ -316,7 +316,7 @@ function createObject2(){
 
 function createSecondBall1(){
     'use strict';
-    const geometry = new THREE.SphereGeometry(2, 100, 100, 0, 360, 0, 180);
+    const geometry = new THREE.SphereGeometry(2, 64, 32, 0, 360, 0, 180);
     const material = new THREE.MeshToonMaterial( { color: 0xfc03c6, wireframe: wireframeBool } );
     secondBall1 = new THREE.Mesh( geometry, material );
     secondBall1.position.set(-4.1, 0, 0);
