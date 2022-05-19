@@ -3,7 +3,7 @@
 var camera, scene, renderer;
 let wireframeBool = false;
 
-var qdown, wdown, adown, sdown, zdown, xdown;
+let qdown, wdown, adown, sdown, zdown, xdown, arrowUpDown, arrowDownDown, arrowRightDown, arrowLeftDown, ddown, cdown;
 
 //-------------------------FIRST------------------------------------
 var firstRing1, firstRing2, firstBall, object1;
@@ -158,25 +158,45 @@ function createObject3() {
 }
 
 let ballSpeed = 0;
+let object3Speed = 0.01;
 function animateObject3() {
     if (qdown){
-        object3.rotation.y += 0.01;
+        object3.rotation.y += object3Speed;
     }
     if (wdown){
-        object3.rotation.y -= 0.01;
+        object3.rotation.y -= object3Speed;
     }
     if(adown){
-        subObject3.rotation.y += 0.01;
+        subObject3.rotation.y += object3Speed;
     }
     if(sdown){
-        subObject3.rotation.y -= 0.01;
+        subObject3.rotation.y -= object3Speed;
     }
     if(zdown){
-        subSubObject3.rotation.y += 0.01;
+        subSubObject3.rotation.y += object3Speed;
     }
     if(xdown){
-        subSubObject3.rotation.y -= 0.01;
+        subSubObject3.rotation.y -= object3Speed;
     }
+    if(arrowUpDown){
+        object3.position.y += object3Speed + 0.02;
+    }
+    if(arrowDownDown){
+        object3.position.y -= object3Speed + 0.02;
+    }
+    if(arrowLeftDown){
+        object3.position.x -= object3Speed + 0.02;
+    }
+    if(arrowRightDown){
+        object3.position.x += object3Speed + 0.02;
+    }
+    if(ddown){
+        object3.position.z += object3Speed + 0.02;
+    }
+    if(cdown){
+        object3.position.z -= object3Speed + 0.02;
+    }
+
     //secondBall3.rotation.y -= 0.01;
     ballSpeed += 0.01
     thirdBall3.position.y = 8 * Math.abs(Math.sin(ballSpeed)) + 2.8 ;
@@ -704,7 +724,24 @@ function onKeyDown(e) {
         case 88: //x
             xdown = true;
             break;
-
+        case 37: //leftArrow
+            arrowLeftDown = true;
+            break;
+        case 38: //upArrow
+            arrowUpDown = true;
+            break;
+        case 39: //rightArrow
+            arrowRightDown = true;
+            break;
+        case 40: //downArrow
+            arrowDownDown = true;
+            break;
+        case 68: //d
+            ddown = true;
+            break;
+        case 67: //c
+            cdown = true;
+            break;
     }
 }
 
@@ -729,6 +766,24 @@ function onKeyUp(e) {
             break;
         case 88: //x
             xdown = false;
+            break;
+        case 37: //leftArrow
+            arrowLeftDown = false;
+            break;
+        case 38: //upArrow
+            arrowUpDown = false;
+            break;
+        case 39: //rightArrow
+            arrowRightDown = false;
+            break;
+        case 40: //downArrow
+            arrowDownDown = false;
+            break;
+        case 68: //d
+            ddown = false;
+            break;
+        case 67: //c
+            cdown = false;
             break;
     }
 }
