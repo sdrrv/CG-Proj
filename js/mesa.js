@@ -150,9 +150,9 @@ function createObject3() {
     object3 = new THREE.Object3D();
     addTable3(object3, 0, 0, 0, 0x1ca8ff, 1);
     addBall3(object3, 6, 2.8, 0, 0xfc03c6, 1);
-    addTable3(object3, 11, 5.6, 0, 0x1ca8ff, 2);
+    addTable3(object3, 11, 5.6, 0, 0x19e393, 2);
     addBall3(object3, 17, 8.4, 0, 0xfc03c6, 2);
-    addTable3(subObject3, 6, 5.6, 0, 0x1ca8ff, 3);
+    addTable3(subObject3, 6, 5.6, 0, 0xe39d19, 3);
     addBall3(subSubObject3, -10, 2.8, 0, 0xfc03c6, 3);
     scene.add(object3);
 }
