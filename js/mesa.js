@@ -376,7 +376,7 @@ function createSeventhRing1(){
 
     const geometry = new THREE.TorusGeometry(8, 0.5, 20, 360, 360);
 
-    const material = new THREE.MeshToonMaterial({color: 0x1ca8ff, wireframe: wireframeBool});
+    const material = new THREE.MeshToonMaterial({color: 0xe38419, wireframe: wireframeBool});
 
     seventhRing1 = new THREE.Mesh(geometry,material);
 
