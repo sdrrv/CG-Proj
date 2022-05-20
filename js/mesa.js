@@ -148,11 +148,11 @@ function addBall3(obj, x, y, z, color, num) {
 
 function createObject3() {
     object3 = new THREE.Object3D();
-    addTable3(object3, 0, 0, 0, 0xffffff, 1);
+    addTable3(object3, 0, 0, 0, 0x1ca8ff, 1);
     addBall3(object3, 6, 2.8, 0, 0xfc03c6, 1);
-    addTable3(object3, 11, 5.6, 0, 0xff7400, 2);
+    addTable3(object3, 11, 5.6, 0, 0x51CB2E, 2);
     addBall3(object3, 17, 8.4, 0, 0xfc03c6, 2);
-    addTable3(subObject3, 6, 5.6, 0, 0xffd500, 3);
+    addTable3(subObject3, 6, 5.6, 0, 0x1ca8ff, 3);
     addBall3(subSubObject3, -10, 2.8, 0, 0xfc03c6, 3);
     scene.add(object3);
 }
@@ -414,7 +414,7 @@ function animateSeventhObject(){
 
 //----------------------------------Imposter---------------------------------------------
 var imposterObject, imposterBelly, imposterHip, imposterBackPack, imposterLeg1, imposterLeg2, imposterVisor;
-let imposterHight = 3, imposterRadious = 2, imposterColour = 0x800080 ;
+let imposterHight = 3, imposterRadious = 2, imposterColour = 0xff00000 ;
 function createImposter(){
     'use strinct'
     imposterObject = new THREE.Object3D();
