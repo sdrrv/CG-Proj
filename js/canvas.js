@@ -603,7 +603,7 @@ function createScene() {
     scene = new THREE.Scene();
     
 
-    scene.add(new THREE.AxisHelper(10));
+    //scene.add(new THREE.AxisHelper(10));
 
     //-----------------First--------------
 
